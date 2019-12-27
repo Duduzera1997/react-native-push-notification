@@ -184,7 +184,7 @@ Notifications.localNotificationSchedule = function(details: Object) {
 		details.fireDate = details.date.getTime();
 		delete details.date;
 		// ignore iOS only repeatType
-		if (['year'].includes(details.repeatType)) {
+		if (['year', 'month'].includes(details.repeatType)) {
 			delete details.repeatType;
 		}
 		this.handler.scheduleLocalNotification(details);
@@ -330,5 +330,9 @@ Notifications.clearAllNotifications = function() {
 	// Only available for Android
 	return this.callNative('clearAllNotifications', arguments)
 }
+
+Notifications.removeAllDeliveredNotifications = function() {
+	return this.callNative('removeAllDeliveredNotifications', arguments);
+};
 
 module.exports = Notifications;
